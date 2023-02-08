@@ -16,7 +16,7 @@ std::set<T> setIntersection(std::set<T>& s1, std::set<T>& s2)
 	std::set<T> tempSet;
 	for (T item: s1)
 	{
-		if (s2.find(item) != s2.end()) //item is in s2
+		if (s2.find(item) != s2.end()) //if item is in s2
 		{
 			tempSet.insert(item);
 		}

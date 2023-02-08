@@ -11,20 +11,33 @@ std::string convToLower(std::string src)
     return src;
 }
 
+
 /** Complete the code to convert a string containing a rawWord
     to a set of words based on the criteria given in the assignment **/
 std::set<std::string> parseStringToWords(string rawWords)
 {
-
-
-
-
-
-
-
-
-
-
+    std::set<std::string> words;
+    rawWords = trim(rawWords);
+    
+    string searchTerms = ". \'";
+    std::size_t prevPos = 0;
+    std::size_t currPos = rawWords.find_first_of(searchTerms);
+    while (currPos != std::string::npos)
+    {
+        words.insert(rawWords.substr(prevPos, currPos - prevPos));
+        prevPos = currPos + 1;
+        currPos = rawWords.find_first_of(searchTerms, currPos + 1);
+    }
+    
+    //may be inefficient
+    for (std::string currStr : words)
+    {
+        if (currStr.size < 2 )
+        {
+            words.erase(currStr);
+        }
+    }
+    return words;
 }
 
 /**************************************************
