@@ -1,9 +1,11 @@
 #ifndef BOOK_H
 #define BOOK_H
 
-#include <product.h>
 #include <string>
-class Book : Product{
+#include "product.h"
+
+class Book : Product
+{
 public:
 	Book(const std::string name, double price, int qty, std::string author, std::string isbn) : 
 		Product("book", name, price, qty), author_(author), isbn_(isbn)

@@ -1,5 +1,6 @@
-#include <product.h>
+#include "product.h"
 #include <string>
+
 class Clothing : Product {
 public:
 	Clothing(const std::string name, double price, int qty, std::string size, std::string brand) :
