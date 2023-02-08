@@ -3,7 +3,7 @@
 class Movie : Product {
 public:
 	Movie(const std::string name, double price, int qty, std::string genre, std::string rating) :
-		Product("Movie", name, price, qty), genre_(genre), rating_(rating)
+		Product("movie", name, price, qty), genre_(genre), rating_(rating)
 	{}
 
 	std::set<std::string> keywords();

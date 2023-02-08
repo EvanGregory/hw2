@@ -3,7 +3,7 @@
 class Clothing : Product {
 public:
 	Clothing(const std::string name, double price, int qty, std::string size, std::string brand) :
-		Product("Clothing", name, price, qty), size_(size), brand_(brand)
+		Product("clothing", name, price, qty), size_(size), brand_(brand)
 	{}
 
 	std::set<std::string> keywords();

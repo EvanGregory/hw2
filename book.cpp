@@ -4,9 +4,7 @@
 
 std::set<std::string> Book::keywords()
 {
-	std::set<std::string> words = parseStringToWords(name_);
-	std::set<std::string> author = parseStringToWords(author_);
-	words.insert(author.begin(), author.end());
+	std::set<std::string> words = setUnion(parseStringToWords(name_), parseStringToWords(author_));
 	words.insert(isbn_);
 	return words;
 }

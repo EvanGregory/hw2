@@ -31,7 +31,7 @@ std::set<std::string> parseStringToWords(string rawWords)
     //may be inefficient
     for (std::string currStr : words)
     {
-        if (currStr.size < 2 )
+        if (currStr.size() < 2 )
         {
             words.erase(currStr);
         }

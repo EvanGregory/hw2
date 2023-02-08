@@ -4,10 +4,7 @@
 
 std::set<std::string> Clothing::keywords()
 {
-	std::set<std::string> words = parseStringToWords(name_);
-	std::set<std::string> brand = parseStringToWords(brand_);
-	words.insert(brand.begin(), brand.end());
-	return words;
+	return setUnion(parseStringToWords(name_), parseStringToWords(brand_));
 }
 
 std::string Clothing::displayString() const

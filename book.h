@@ -6,7 +6,7 @@
 class Book : Product{
 public:
 	Book(const std::string name, double price, int qty, std::string author, std::string isbn) : 
-		Product("Book", name, price, qty), author_(author), isbn_(isbn)
+		Product("book", name, price, qty), author_(author), isbn_(isbn)
 	{}
 
 	std::set<std::string> keywords();
