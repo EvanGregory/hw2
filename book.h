@@ -1,3 +1,6 @@
+#ifndef BOOK_H
+#define BOOK_H
+
 #include <product.h>
 #include <string>
 class Book : Product{
@@ -14,3 +17,4 @@ private:
 	std::string author_;
 	std::string isbn_;
 };
+#endif

@@ -17,14 +17,13 @@ std::string convToLower(std::string src)
 std::set<std::string> parseStringToWords(string rawWords)
 {
     std::set<std::string> words;
-    rawWords = trim(rawWords);
     
     string searchTerms = ". \'";
     std::size_t prevPos = 0;
     std::size_t currPos = rawWords.find_first_of(searchTerms);
     while (currPos != std::string::npos)
     {
-        words.insert(rawWords.substr(prevPos, currPos - prevPos));
+        words.insert(trim(rawWords.substr(prevPos, currPos - prevPos)));
         prevPos = currPos + 1;
         currPos = rawWords.find_first_of(searchTerms, currPos + 1);
     }
