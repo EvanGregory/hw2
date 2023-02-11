@@ -7,6 +7,10 @@ public:
 
 	void addUser(User* u);
 
+	std::set<Product*>& getProducts() const;
+
+	std::set<User*>& getUsers() const;
+
 	/**
 	 * Performs a search of products whose keywords match the given "terms"
 	 *  type 0 = AND search (intersection of results for each term) while

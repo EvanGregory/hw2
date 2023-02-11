@@ -17,5 +17,6 @@ std::string Book::displayString() const
 
 void Book::dump(std::ostream& os) const
 {
-
+	Product::dump(os);
+	os << isbn_ << "\n" << author_ << endl;
 }

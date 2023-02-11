@@ -101,9 +101,81 @@ int main(int argc, char* argv[])
                 done = true;
             }
 	    /* Add support for other commands here */
-
-
-
+            else if ( cmd == "ADD" ) {
+                string username; 
+                ss >> username;
+                string searchNumStr;
+                ss >> searchNumStr;
+                int searchNumInt = stoi(searchNumStr);
+                User* currUser = nullptr;
+                for (User* u : ds.getUsers())
+                {
+                    if (u->getName() == username)
+                        currUser = u;
+                }
+                if (currUser == nullptr || searchNumInt > hits.size())
+                {
+                    cout << "Invalid request" << endl;
+                }
+                else
+                {
+                    currUser->addToCart(hits[searchNumInt - 1]);
+                }
+            }
+            else if ( cmd == "VIEWCART" ) {
+                string username;
+                ss >> username;
+                User* currUser = nullptr;
+                for (User* u : ds.getUsers())
+                {
+                    if (u->getName() == username)
+                        currUser = u;
+                }
+                if (currUser == nullptr)
+                {
+                    cout << "Invalid username" << endl;
+                }
+                else
+                {
+                    int i = 1;
+                    for (Product* currProd : currUser->getCart())
+                    {
+                        cout << i++ << ": " << currProd->displayString() << endl;
+                    }
+                }
+            }
+            else if ( cmd == "BUYCART" ) {
+                string username;
+                ss >> username;
+                User* currUser = nullptr;
+                for (User* u : ds.getUsers())
+                {
+                    if (u->getName() == username)
+                        currUser = u;
+                }
+                if (currUser == nullptr)
+                {
+                    cout << "Invalid username" << endl;
+                }
+                else
+                {
+                    vector<Product*>& cart = currUser->getCart();
+                    vector<Product*> newCart;
+                    for (int i = cart.size() - 1; i >= 0; i--)
+                    {
+                        if (currUser->getBalance() >= cart[i]->getPrice())
+                        {
+                            cart[i]->subtractQty();
+                        }
+                        else
+                        {
+                            newCart.insert(0, cart[i]);
+                        }
+                        cart.pop_back();
+                    }
+                    cart = newCart;
+                }
+            }
 
             else {
                 cout << "Unknown command" << endl;

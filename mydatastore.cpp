@@ -11,6 +11,16 @@ void MyDataStore::addUser(User* u)
 	m_users.insert(u);
 }
 
+std::set<Product*>& MyDataStore::getProducts() const
+{
+	return m_products;
+}
+
+std::set<User*>& MyDataStore::getUsers() const
+{
+	return m_users;
+}
+
 /**
  * Performs a search of products whose keywords match the given "terms"
  *  type 0 = AND search (intersection of results for each term) while
@@ -22,9 +32,9 @@ std::vector<Product*> MyDataStore::search(std::vector<std::string>& terms, int t
 
 	if (type == 0) //AND search
 	{
+		std::set<std::string> s(terms.begin(), terms.end());
 		for (std::string currTerm : terms)
 		{
-			std::set<std::string> s(v.begin(), v.end());
 			if (setIntersection(currProd->keywords(), s) == currProd->keyWords)
 			{
 				foundProds.push_back(currProd);
@@ -33,9 +43,9 @@ std::vector<Product*> MyDataStore::search(std::vector<std::string>& terms, int t
 	}
 	else // OR search
 	{
+		std::set<std::string> s(terms.begin(), terms.end());
 		for (Product* currProd : m_products)
 		{
-			std::set<std::string> s(v.begin(), v.end());
 			if (setUnion(currProd->keywords(), s) != currProd->keyWords)
 			{
 				foundProds.push_back(currProd);
@@ -46,8 +56,16 @@ std::vector<Product*> MyDataStore::search(std::vector<std::string>& terms, int t
 
 void MyDataStore::dump(std::ostream& ofile)
 {
+	ofile << "<products>" << endl;
 	for (Product* currProd : m_products)
 	{
-		currProd->dump();
+		currProd->dump(ofile);
 	}
+	ofile << "</products>" << endl;
+	ofile << "<users>" << endl;
+	for (User* currUser : m_users)
+	{
+		currUser->dump(ofile);
+	}
+	ofile << "</users>" << endl;
 }
