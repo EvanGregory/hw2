@@ -23,18 +23,13 @@ std::set<std::string> parseStringToWords(string rawWords)
     std::size_t currPos = rawWords.find_first_of(searchTerms);
     while (currPos != std::string::npos)
     {
-        words.insert(trim(rawWords.substr(prevPos, currPos - prevPos)));
+	std::string temp = trim(rawWords.substr(prevPos, currPos - prevPos));
+	if (temp.size() >= 2)
+	{
+	    words.insert(temp);
+	}
         prevPos = currPos + 1;
-        currPos = rawWords.find_first_of(searchTerms, currPos + 1);
-    }
-    
-    //may be inefficient
-    for (std::string currStr : words)
-    {
-        if (currStr.size() < 2 )
-        {
-            words.erase(currStr);
-        }
+        currPos = rawWords.find_first_of(searchTerms, prevPos);
     }
     return words;
 }
