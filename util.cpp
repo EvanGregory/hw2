@@ -18,19 +18,28 @@ std::set<std::string> parseStringToWords(string rawWords)
 {
   std::set<std::string> words;
     
-  string searchTerms = ". \'";
+  string searchTerms = ". '";
   std::size_t prevPos = 0;
   std::size_t currPos = rawWords.find_first_of(searchTerms);
   while (currPos != std::string::npos)
   {
     std::string temp1 = rawWords.substr(prevPos, currPos - prevPos);
-    std::string temp2 = trim(temp1);
+    std::string temp2 = convToLower(trim(temp1));
     if (temp2.size() >= 2)
     {
       words.insert(temp2);
     }
     prevPos = currPos + 1;
     currPos = rawWords.find_first_of(searchTerms, prevPos);
+  }
+  if (!rawWords.empty()) //gets final word
+  {
+    std::string temp1 = rawWords.substr(prevPos);
+    std::string temp2 = convToLower(trim(temp1));
+    if (temp2.size() >= 2)
+    {
+      words.insert(temp2);
+    }
   }
   return words;
 }

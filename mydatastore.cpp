@@ -1,6 +1,9 @@
 #include "mydatastore.h"
 #include "util.h"
 
+#include <iostream>
+#include <sstream>
+
 void MyDataStore::addProduct(Product* p)
 {
 	m_products.insert(p);
@@ -19,14 +22,13 @@ void MyDataStore::addUser(User* u)
 std::vector<Product*> MyDataStore::search(std::vector<std::string>& terms, int type)
 {
 	std::vector<Product*> foundProds;
-
 	if (type == 0) //AND search
 	{
 		std::set<std::string> s(terms.begin(), terms.end());
 		for (Product* currProd : m_products)
 		{
-      std::set<std::string> keywords = currProd->keywords();
-			if (setIntersection(keywords, s) == keywords)
+      		std::set<std::string> keywords = currProd->keywords();
+			if (setUnion(keywords, s) == keywords)
 			{
 				foundProds.push_back(currProd);
 			}
@@ -37,8 +39,8 @@ std::vector<Product*> MyDataStore::search(std::vector<std::string>& terms, int t
 		std::set<std::string> s(terms.begin(), terms.end());
 		for (Product* currProd : m_products)
 		{
-      std::set<std::string> keywords = currProd->keywords();
-			if (setUnion(keywords, s) != keywords)
+      		std::set<std::string> keywords = currProd->keywords();
+			if ( !(setIntersection(keywords, s).empty()) )
 			{
 				foundProds.push_back(currProd);
 			}

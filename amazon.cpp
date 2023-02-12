@@ -140,7 +140,7 @@ int main(int argc, char* argv[])
                     int i = 1;
                     for (Product* currProd : currUser->cart_)
                     {
-                        cout << i++ << ": " << currProd->displayString() << endl;
+                        cout << "Item " << i++ << "\n" << currProd->displayString() << endl;
                     }
                 }
             }
@@ -162,7 +162,7 @@ int main(int argc, char* argv[])
                     vector<Product*>& cart = currUser->cart_;
                     for (int i = cart.size() - 1; i >= 0; i--)
                     {
-                        if (currUser->getBalance() >= cart[i]->getPrice())
+                        if (currUser->getBalance() >= cart[i]->getPrice() && cart[i]->getQty() > 0)
                         {
                             cart[i]->subtractQty(1);
                             currUser->deductAmount(cart[i]->getPrice());

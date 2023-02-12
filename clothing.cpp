@@ -11,10 +11,10 @@ std::set<std::string> Clothing::keywords() const
 
 std::string Clothing::displayString() const
 {
-	std::string str; 
-	str.append(name_, "\nSize: ", size_, " Brand: ", brand_, "\n", 
-	price_, " ", qty_, " left.\n");
-	return str;
+    char buffer[1024];
+    snprintf(buffer, sizeof(buffer), "%s\nSize: %s Brand: %s\n%.2f %d left.\n",
+        name_.c_str(), size_.c_str(), brand_.c_str(), price_, qty_);
+    return std::string(buffer);
 }
 
 void Clothing::dump(std::ostream& os) const

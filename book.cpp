@@ -14,10 +14,14 @@ std::set<std::string> Book::keywords() const
 
 std::string Book::displayString() const
 {
-	std::string str;
-	str.append(name_, "\nAuthor: ", author_, " ISBN: ", isbn_, "\n", 
-	price_, " ", qty_, " left.\n");
-	return str;
+    char buffer[1024];
+    snprintf(buffer, sizeof(buffer), "%s\nAuthor: %s ISBN: %s\n%.2f %d left.\n",
+        name_.c_str(), author_.c_str(), isbn_.c_str(), price_, qty_);
+    return std::string(buffer);
+	//std::string str;
+	//str = (name_ + "\nAuthor: " + author_ + " ISBN: " + isbn_ + "\n" + 
+	//price_ + " " + qty_ + " left.\n");
+	//return str;
 }
 
 void Book::dump(std::ostream& os) const
